@@ -30,7 +30,7 @@ function SetModify()
 	JY.ThingUseFunction[2]=newThing_2;
 
   --在此可以定义使用新事件函数的场景
-    JY.SceneNewEventFunction[1]=newSceneEvent_1;          --新的河洛客栈事件处理函数
+    --JY.SceneNewEventFunction[1]=newSceneEvent_1;          --新的河洛客栈事件处理函数
 
 end
 
