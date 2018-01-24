@@ -433,7 +433,7 @@ function SetGlobalConst()
                    {116,67,70},
                    {119,68,100},}
 
-    CC.NewPersonName="小虾米";                --新游戏的数据
+    CC.NewPersonName="小蝦米";                --新游戏的数据
     CC.NewGameSceneID=70;                      --场景ID
     CC.NewGameSceneX=19;                       --场景坐标
     CC.NewGameSceneY=20;
