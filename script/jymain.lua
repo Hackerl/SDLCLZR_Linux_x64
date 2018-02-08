@@ -134,7 +134,7 @@ function JY_Main_sub()        --真正的游戏主程序入口
 
 	Cls();
 
-    PlayMIDI(16);
+  PlayMIDI(16);
 	lib.ShowSlow(50,0);
 
 	local menu={  {"重新开始",nil,1},
@@ -182,6 +182,29 @@ function JY_Main_sub()        --真正的游戏主程序入口
 		DrawString(menux,CC.StartMenuY,"请稍候...",C_RED,CC.StartMenuFontSize);
 		ShowScreen();
         LoadRecord(r);
+
+-- 修改数据
+    JY.Person[0]["内力最大值"] = 9999;
+    JY.Person[0]["生命最大值"]= 999;
+    JY.Person[0]["资质"] = 100;
+    JY.Person[0]["左右互搏"] = 1;
+    JY.Person[0]["内力性质"] = 0;
+    JY.Person[0]["生命"]=JY.Person[0]["生命最大值"];
+    JY.Person[0]["内力"]=JY.Person[0]["内力最大值"];
+
+    JY.Person[0]["武功1"] = 0x6D
+    JY.Person[0]["武功等级1"] = 900
+    JY.Person[0]["武功2"] = 0x6A
+    JY.Person[0]["武功等级2"] = 900
+    JY.Person[0]["武功3"] = 0x1A
+    JY.Person[0]["武功等级3"] = 900
+    JY.Person[0]["武功4"] = 0x2F
+    JY.Person[0]["武功等级4"] = 900
+    JY.Person[0]["武功5"] = 0x6b
+    JY.Person[0]["武功等级5"] = 900
+    JY.Person[0]["武功6"] = 0x6c
+    JY.Person[0]["武功等级6"] = 900
+
 		Cls();
 		ShowScreen();
 		JY.Status=GAME_FIRSTMMAP;
@@ -2001,7 +2024,7 @@ function PlayMIDI(id)             --播放midi
         return ;
     end
     if id>=0 then
-        lib.PlayMIDI(string.format(CC.MIDIFile,id+1));
+        lib.PlayMIDI(string.format(CC.MIDIFile,id));
     end
 end
 

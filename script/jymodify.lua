@@ -25,9 +25,9 @@ function SetModify()
    Menu_System=Menu_System_new;
 
    --在此定义特殊物品。没有定义的均调用缺省物品函数
-    JY.ThingUseFunction[182]=Show_Position;     --罗盘函数
-	JY.ThingUseFunction[0]=newThing_0;   --改变原来康贝特的功能为醉生梦死酒忘记武功。
-	JY.ThingUseFunction[2]=newThing_2;
+    --JY.ThingUseFunction[182]=Show_Position;     --罗盘函数
+	--JY.ThingUseFunction[0]=newThing_0;   --改变原来康贝特的功能为醉生梦死酒忘记武功。
+	--JY.ThingUseFunction[2]=newThing_2;
 
   --在此可以定义使用新事件函数的场景
     --JY.SceneNewEventFunction[1]=newSceneEvent_1;          --新的河洛客栈事件处理函数

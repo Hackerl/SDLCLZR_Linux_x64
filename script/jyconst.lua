@@ -447,20 +447,20 @@ function SetGlobalConst()
    CC.PersonAttribMax["生命最大值"]=999;
    CC.PersonAttribMax["受伤程度"]=100;
    CC.PersonAttribMax["中毒程度"]=100;
-   CC.PersonAttribMax["内力最大值"]=999;
+   CC.PersonAttribMax["内力最大值"]=9999;
    CC.PersonAttribMax["体力"]=100;
-   CC.PersonAttribMax["攻击力"]=100;
-   CC.PersonAttribMax["防御力"]=100;
-   CC.PersonAttribMax["轻功"]=100;
-   CC.PersonAttribMax["医疗能力"]=100;
-   CC.PersonAttribMax["用毒能力"]=100;
-   CC.PersonAttribMax["解毒能力"]=100;
-   CC.PersonAttribMax["抗毒能力"]=100;
-   CC.PersonAttribMax["拳掌功夫"]=100;
-   CC.PersonAttribMax["御剑能力"]=100;
-   CC.PersonAttribMax["耍刀技巧"]=100;
-   CC.PersonAttribMax["特殊兵器"]=100;
-   CC.PersonAttribMax["暗器技巧"]=100;
+   CC.PersonAttribMax["攻击力"]=500;
+   CC.PersonAttribMax["防御力"]=500;
+   CC.PersonAttribMax["轻功"]=500;
+   CC.PersonAttribMax["医疗能力"]=320;
+   CC.PersonAttribMax["用毒能力"]=320;
+   CC.PersonAttribMax["解毒能力"]=320;
+   CC.PersonAttribMax["抗毒能力"]=320;
+   CC.PersonAttribMax["拳掌功夫"]=320;
+   CC.PersonAttribMax["御剑能力"]=320;
+   CC.PersonAttribMax["耍刀技巧"]=320;
+   CC.PersonAttribMax["特殊兵器"]=320;
+   CC.PersonAttribMax["暗器技巧"]=320;
    CC.PersonAttribMax["武学常识"]=100;
    CC.PersonAttribMax["品德"]=100;
    CC.PersonAttribMax["资质"]=100;
@@ -491,7 +491,7 @@ function SetGlobalConst()
 	--显示主地图和场景地图坐标
 	--如果显示坐标，则会增加cpu占用。机器速度慢的话可能会卡。这个在调试时有用。
 	--注意: 如果设置了CONFIG.FastShowScreen=1，则场景视角范围超出后显示的坐标不正确。
-	CC.ShowXY=1     --0 不显示 1 显示
+	CC.ShowXY=0     --0 不显示 1 显示
 
 	--以下为控制显示方式的参数
 
