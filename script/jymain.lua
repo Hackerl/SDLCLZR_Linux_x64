@@ -9,7 +9,7 @@
 
 --本模块是lua主模块，由C主程序JYLua.exe调用。C程序主要提供游戏需要的视频、音乐、键盘等API函数，供lua调用。
 --游戏的所有逻辑都在lua代码中，以方便大家对代码的修改。
---为加快速度，显示主地图/场景地图/战斗地图部分用C API实现。
+--为加快速度，显示主地图/场景地图/战斗地图部Base分用C API实现。
 
 --导入其他模块。之所以做成函数是为了避免编译查错时编译器会寻找这些模块。
 function IncludeFile()              --导入其他模块
@@ -17,6 +17,10 @@ function IncludeFile()              --导入其他模块
     dofile(CONFIG.ScriptPath .. "jyconst.lua");
     dofile(CONFIG.ScriptPath .. "jymodify.lua");
     dofile(CONFIG.ScriptPath .. "jycharset.lua"); -- 编码转换相关
+end
+
+function RequireFile()
+    require(CONFIG.ScriptPath .. "record")
 end
 
 
@@ -107,6 +111,7 @@ function JY_Main_sub()        --真正的游戏主程序入口
     SetGlobalConst();    --设置全程变量CC, 程序使用的常量
     SetGlobal();         --设置全程变量JY
 
+    RequireFile()
     GenTalkIdx();        --生成对话idx
 
     SetModify();         --设置对函数的修改，定义新的物品，事件等等
@@ -1585,167 +1590,7 @@ function DrawSMap(fastdraw)         --绘场景地图
 end
 
 
--- 读取游戏进度
--- id=0 新进度，=1/2/3 进度
---
---这里是先把数据读入Byte数组中。然后定义访问相应表的方法，在访问表时直接从数组访问。
---与以前的实现相比，从文件中读取和保存到文件的时间显著加快。而且内存占用少了
-function LoadRecord(id)       -- 读取游戏进度
-    local t1=lib.GetTime();
 
-    --读取R*.idx文件
-    local data=Byte.create(6*4);
-    Byte.loadfile(data,CC.R_IDXFilename[id],0,6*4);
-
-	local idx={};
-	idx[0]=0;
-	for i =1,6 do
-	    idx[i]=Byte.get32(data,4*(i-1));
-	end
-
-    --读取R*.grp文件
-    JY.Data_Base=Byte.create(idx[1]-idx[0]);              --基本数据
-    Byte.loadfile(JY.Data_Base,CC.R_GRPFilename[id],idx[0],idx[1]-idx[0]);
-
-    --设置访问基本数据的方法，这样就可以用访问表的方式访问了。而不用把二进制数据转化为表。节约加载时间和空间
-	local meta_t={
-	    __index=function(t,k)
-	        return GetDataFromStruct(JY.Data_Base,0,CC.Base_S,k);
-		end,
-
-		__newindex=function(t,k,v)
-	        SetDataFromStruct(JY.Data_Base,0,CC.Base_S,k,v);
-	 	end
-	}
-    setmetatable(JY.Base,meta_t);
-
-
-    JY.PersonNum=math.floor((idx[2]-idx[1])/CC.PersonSize);   --人物
-
-	JY.Data_Person=Byte.create(CC.PersonSize*JY.PersonNum);
-	Byte.loadfile(JY.Data_Person,CC.R_GRPFilename[id],idx[1],CC.PersonSize*JY.PersonNum);
-
-	for i=0,JY.PersonNum-1 do
-		JY.Person[i]={};
-		local meta_t={
-			__index=function(t,k)
-				return GetDataFromStruct(JY.Data_Person,i*CC.PersonSize,CC.Person_S,k);
-			end,
-
-			__newindex=function(t,k,v)
-				SetDataFromStruct(JY.Data_Person,i*CC.PersonSize,CC.Person_S,k,v);
-			end
-		}
-        setmetatable(JY.Person[i],meta_t);
-	end
-
-    JY.ThingNum=math.floor((idx[3]-idx[2])/CC.ThingSize);     --物品
-	JY.Data_Thing=Byte.create(CC.ThingSize*JY.ThingNum);
-	Byte.loadfile(JY.Data_Thing,CC.R_GRPFilename[id],idx[2],CC.ThingSize*JY.ThingNum);
-	for i=0,JY.ThingNum-1 do
-		JY.Thing[i]={};
-		local meta_t={
-			__index=function(t,k)
-				return GetDataFromStruct(JY.Data_Thing,i*CC.ThingSize,CC.Thing_S,k);
-			end,
-
-			__newindex=function(t,k,v)
-				SetDataFromStruct(JY.Data_Thing,i*CC.ThingSize,CC.Thing_S,k,v);
-			end
-		}
-        setmetatable(JY.Thing[i],meta_t);
-	end
-
-    JY.SceneNum=math.floor((idx[4]-idx[3])/CC.SceneSize);     --场景
-	JY.Data_Scene=Byte.create(CC.SceneSize*JY.SceneNum);
-	Byte.loadfile(JY.Data_Scene,CC.R_GRPFilename[id],idx[3],CC.SceneSize*JY.SceneNum);
-	for i=0,JY.SceneNum-1 do
-		JY.Scene[i]={};
-		local meta_t={
-			__index=function(t,k)
-				return GetDataFromStruct(JY.Data_Scene,i*CC.SceneSize,CC.Scene_S,k);
-			end,
-
-			__newindex=function(t,k,v)
-				SetDataFromStruct(JY.Data_Scene,i*CC.SceneSize,CC.Scene_S,k,v);
-			end
-		}
-        setmetatable(JY.Scene[i],meta_t);
-	end
-
-    JY.WugongNum=math.floor((idx[5]-idx[4])/CC.WugongSize);     --武功
-	JY.Data_Wugong=Byte.create(CC.WugongSize*JY.WugongNum);
-	Byte.loadfile(JY.Data_Wugong,CC.R_GRPFilename[id],idx[4],CC.WugongSize*JY.WugongNum);
-	for i=0,JY.WugongNum-1 do
-		JY.Wugong[i]={};
-		local meta_t={
-			__index=function(t,k)
-				return GetDataFromStruct(JY.Data_Wugong,i*CC.WugongSize,CC.Wugong_S,k);
-			end,
-
-			__newindex=function(t,k,v)
-				SetDataFromStruct(JY.Data_Wugong,i*CC.WugongSize,CC.Wugong_S,k,v);
-			end
-		}
-        setmetatable(JY.Wugong[i],meta_t);
-	end
-
-    JY.ShopNum=math.floor((idx[6]-idx[5])/CC.ShopSize);     --小宝商店
-	JY.Data_Shop=Byte.create(CC.ShopSize*JY.ShopNum);
-	Byte.loadfile(JY.Data_Shop,CC.R_GRPFilename[id],idx[5],CC.ShopSize*JY.ShopNum);
-	for i=0,JY.ShopNum-1 do
-		JY.Shop[i]={};
-		local meta_t={
-			__index=function(t,k)
-				return GetDataFromStruct(JY.Data_Shop,i*CC.ShopSize,CC.Shop_S,k);
-			end,
-
-			__newindex=function(t,k,v)
-				SetDataFromStruct(JY.Data_Shop,i*CC.ShopSize,CC.Shop_S,k,v);
-			end
-		}
-        setmetatable(JY.Shop[i],meta_t);
-
-    end
-
-    lib.LoadSMap(CC.S_Filename[id],CC.TempS_Filename,JY.SceneNum,CC.SWidth,CC.SHeight,CC.D_Filename[id],CC.DNum,11);
-	collectgarbage();
-
-	lib.Debug(string.format("Loadrecord time=%d",lib.GetTime()-t1));
-end
-
--- 写游戏进度
--- id=0 新进度，=1/2/3 进度
-function SaveRecord(id)         -- 写游戏进度
-    --读取R*.idx文件
-    local t1=lib.GetTime();
-
-    local data=Byte.create(6*4);
-    Byte.loadfile(data,CC.R_IDXFilename[id],0,6*4);
-
-	local idx={};
-	idx[0]=0;
-	for i =1,6 do
-	    idx[i]=Byte.get32(data,4*(i-1));
-	end
-
-    --写R*.grp文件
-    Byte.savefile(JY.Data_Base,CC.R_GRPFilename[id],idx[0],idx[1]-idx[0]);
-
-	Byte.savefile(JY.Data_Person,CC.R_GRPFilename[id],idx[1],CC.PersonSize*JY.PersonNum);
-
-	Byte.savefile(JY.Data_Thing,CC.R_GRPFilename[id],idx[2],CC.ThingSize*JY.ThingNum);
-
-	Byte.savefile(JY.Data_Scene,CC.R_GRPFilename[id],idx[3],CC.SceneSize*JY.SceneNum);
-
-	Byte.savefile(JY.Data_Wugong,CC.R_GRPFilename[id],idx[4],CC.WugongSize*JY.WugongNum);
-
-	Byte.savefile(JY.Data_Shop,CC.R_GRPFilename[id],idx[5],CC.ShopSize*JY.ShopNum);
-
-    lib.SaveSMap(CC.S_Filename[id],CC.D_Filename[id]);
-    lib.Debug(string.format("SaveRecord time=%d",lib.GetTime()-t1));
-
-end
 -------------------------------------------------------------------------------------
 -----------------------------------通用函数-------------------------------------------
 
@@ -1779,44 +1624,7 @@ function SetD(Sceneid,id,i,v)         --写D×
     lib.SetD(Sceneid,id,i,v);
 end
 
---从数据的结构中翻译数据
---data 二进制数组
---offset data中的偏移
---t_struct 数据的结构，在jyconst中有很多定义
---key  访问的key
-function GetDataFromStruct(data,offset,t_struct,key)  --从数据的结构中翻译数据，用来取数据
-    local t=t_struct[key];
-	local r;
-	if t[2]==0 then
-		r=Byte.get16(data,t[1]+offset);
-	elseif t[2]==1 then
-		r=Byte.getu16(data,t[1]+offset);
-	elseif t[2]==2 then
-		if CC.SrcCharSet==0 then
-			r=change_charsert(Byte.getstr(data,t[1]+offset,t[3]),0);
-		else
-			r=Byte.getstr(data,t[1]+offset,t[3]);
-		end
-	end
-	return r;
-end
 
-function SetDataFromStruct(data,offset,t_struct,key,v)  --从数据的结构中翻译数据，保存数据
-    local t=t_struct[key];
-	if t[2]==0 then
-		Byte.set16(data,t[1]+offset,v);
-	elseif t[2]==1 then
-		Byte.setu16(data,t[1]+offset,v);
-	elseif t[2]==2 then
-		local s;
-		if CC.SrcCharSet==0 then
-			s=change_charsert(v,1);
-		else
-			s=v;
-		end
-		Byte.setstr(data,t[1]+offset,t[3],s);
-	end
-end
 
 --按照t_struct 定义的结构把数据从data二进制串中读到表t中
 function LoadData(t,t_struct,data)        --data二进制串中读到表t中
@@ -4002,7 +3810,6 @@ end
 --小宝卖东西
 function instruct_64()                 --小宝卖东西
     local headid=111;           --小宝头像
-
 
     local id=-1;
     for i=0,JY.ShopNum-1 do                --找到当前商店id
