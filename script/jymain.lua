@@ -14,9 +14,9 @@
 --导入其他模块。之所以做成函数是为了避免编译查错时编译器会寻找这些模块。
 function IncludeFile()              --导入其他模块
     --dofile("config.lua");       --此文件在C函数中预先加载。这里就不加载了
-    dofile(CONFIG.ScriptPath .. "jyconst.lua");
-    dofile(CONFIG.ScriptPath .. "jymodify.lua");
-    dofile(CONFIG.ScriptPath .. "jycharset.lua"); -- 编码转换相关
+    require(CONFIG.ScriptPath .. "jyconst");
+    require(CONFIG.ScriptPath .. "jymodify");
+    require(CONFIG.ScriptPath .. "jycharset"); -- 编码转换相关
 end
 
 function RequireFile()

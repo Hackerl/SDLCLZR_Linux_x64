@@ -46,112 +46,112 @@ function SetGlobalConst()
 	GAME_DEAD =6;       --死亡画面
     GAME_END  =7;       --结束
 
-   --游戏数据全局变量
-   CC={};      --定义游戏中使用的常量，这些可以在修改游戏时修改之
+    --游戏数据全局变量
+    CC={};      --定义游戏中使用的常量，这些可以在修改游戏时修改之
 
-   CC.SrcCharSet=0;         --源代码的字符集 0 utf8  1 big5，用于转换R×。 如果源码被转换为big5，则应设为1
-   CC.OSCharSet=CONFIG.OSCharSet;         --OS 字符集，0 GB, 1 Big5
-   CC.FontName=CONFIG.FontName;    --显示字体
+    CC.SrcCharSet=0;         --源代码的字符集 0 utf8  1 big5，用于转换R×。 如果源码被转换为big5，则应设为1
+    CC.OSCharSet=CONFIG.OSCharSet;         --OS 字符集，0 GB, 1 Big5
+    CC.FontName=CONFIG.FontName;    --显示字体
 
-   CC.ScreenW=CONFIG.Width;          --显示窗口宽高
-   CC.ScreenH=CONFIG.Height;
+    CC.ScreenW=CONFIG.Width;          --显示窗口宽高
+    CC.ScreenH=CONFIG.Height;
 
-   --定义记录文件名。S和D由于是固定大小，因此不再定义idx了。
-   local SavePath = CONFIG.DataPath .. "save/";
+    --定义记录文件名。S和D由于是固定大小，因此不再定义idx了。
+    local SavePath = CONFIG.DataPath .. "save/";
 
-   CC.R_IDXFilename={[0] = SavePath .. "ranger.idx",
+    CC.R_IDXFilename={[0] = SavePath .. "ranger.idx",
                      SavePath .. "r1.idx",
-					 SavePath .. "r2.idx",
-					 SavePath .. "r3.idx",};
-   CC.R_GRPFilename={[0]=SavePath .. "ranger.grp",
+    				 SavePath .. "r2.idx",
+    				 SavePath .. "r3.idx",};
+    CC.R_GRPFilename={[0]=SavePath .. "ranger.grp",
                      SavePath  .. "r1.grp",
-					 SavePath  .. "r2.grp",
-					 SavePath .. "r3.grp",};
-   CC.S_Filename={[0]=SavePath .. "allsin.grp",
+    				 SavePath  .. "r2.grp",
+    				 SavePath .. "r3.grp",};
+    CC.S_Filename={[0]=SavePath .. "allsin.grp",
                   SavePath .. "s1.grp",
-				  SavePath  .. "s2.grp",
-				  SavePath  .. "s3.grp",};
+    			  SavePath  .. "s2.grp",
+    			  SavePath  .. "s3.grp",};
 
-   CC.TempS_Filename=SavePath  .. "allsinbk.grp";
-   CC.D_Filename={[0]=SavePath  .. "alldef.grp",
+    CC.TempS_Filename=SavePath  .. "allsinbk.grp";
+    CC.D_Filename={[0]=SavePath  .. "alldef.grp",
                    SavePath  .. "d1.grp",
-				   SavePath  .. "d2.grp",
-				   SavePath  .. "d3.grp",};
+    			   SavePath  .. "d2.grp",
+    			   SavePath  .. "d3.grp",};
 
-   CC.PaletteFile=CONFIG.DataPath .. "mmap.col";
-   CC.FirstFile=CONFIG.PicturePath .. "title.png";
-   CC.DeadFile=CONFIG.PicturePath .. "dead.png";
+    CC.PaletteFile=CONFIG.DataPath .. "mmap.col";
+    CC.FirstFile=CONFIG.PicturePath .. "title.png";
+    CC.DeadFile=CONFIG.PicturePath .. "dead.png";
 
-   CC.MMapFile={CONFIG.DataPath .. "earth.002",
+    CC.MMapFile={CONFIG.DataPath .. "earth.002",
                 CONFIG.DataPath .. "surface.002",
-				CONFIG.DataPath .. "building.002",
-		        CONFIG.DataPath .. "buildx.002",
-				CONFIG.DataPath .. "buildy.002"};
+    			CONFIG.DataPath .. "building.002",
+    	        CONFIG.DataPath .. "buildx.002",
+    			CONFIG.DataPath .. "buildy.002"};
 
-   --各种贴图文件名。
-   CC.MMAPPicFile={CONFIG.DataPath .. "mmap.idx",CONFIG.DataPath .. "mmap.grp"};
-   CC.SMAPPicFile={CONFIG.DataPath .. "sdx",CONFIG.DataPath .. "smp"};
-   CC.WMAPPicFile={CONFIG.DataPath .. "wdx",CONFIG.DataPath .. "wmp"};
-   CC.EffectFile={CONFIG.DataPath .. "eft.idx",CONFIG.DataPath .. "eft.grp"};
-   CC.FightPicFile={CONFIG.DataPath .. "fight/fight%03d.idx",CONFIG.DataPath .. "fight/fight%03d.grp"};  --此处为字符串格式，类似于C中printf的格式。
+    --各种贴图文件名。
+    CC.MMAPPicFile={CONFIG.DataPath .. "mmap.idx",CONFIG.DataPath .. "mmap.grp"};
+    CC.SMAPPicFile={CONFIG.DataPath .. "sdx",CONFIG.DataPath .. "smp"};
+    CC.WMAPPicFile={CONFIG.DataPath .. "wdx",CONFIG.DataPath .. "wmp"};
+    CC.EffectFile={CONFIG.DataPath .. "eft.idx",CONFIG.DataPath .. "eft.grp"};
+    CC.FightPicFile={CONFIG.DataPath .. "fight/fight%03d.idx",CONFIG.DataPath .. "fight/fight%03d.grp"};  --此处为字符串格式，类似于C中printf的格式。
 
-   CC.HeadPicFile={CONFIG.DataPath .. "hdgrp.idx",CONFIG.DataPath .. "hdgrp.grp"};
-   CC.ThingPicFile={CONFIG.DataPath .. "thing.idx",CONFIG.DataPath .. "thing.grp"};
+    CC.HeadPicFile={CONFIG.DataPath .. "hdgrp.idx",CONFIG.DataPath .. "hdgrp.grp"};
+    CC.ThingPicFile={CONFIG.DataPath .. "thing.idx",CONFIG.DataPath .. "thing.grp"};
 
 
-   CC.MIDIFile=CONFIG.SoundPath .. "%02d.mid";
-   CC.ATKFile=CONFIG.SoundPath .. "atk%02d.wav";
-   CC.EFile=CONFIG.SoundPath .. "e%02d.wav";
+    CC.MIDIFile=CONFIG.SoundPath .. "%02d.mid";
+    CC.ATKFile=CONFIG.SoundPath .. "atk%02d.wav";
+    CC.EFile=CONFIG.SoundPath .. "e%02d.wav";
 
-   CC.WarFile=CONFIG.DataPath .. "war.sta";
-   CC.WarMapFile={CONFIG.DataPath .. "warfld.idx",
+    CC.WarFile=CONFIG.DataPath .. "war.sta";
+    CC.WarMapFile={CONFIG.DataPath .. "warfld.idx",
                   CONFIG.DataPath .. "warfld.grp"};
 
-   CC.TalkIdxFile=CONFIG.ScriptPath .. "oldtalk.idx";
-   CC.TalkGrpFile=CONFIG.ScriptPath .. "oldtalk.grp";
+    CC.TalkIdxFile=CONFIG.ScriptPath .. "oldtalk.idx";
+    CC.TalkGrpFile=CONFIG.ScriptPath .. "oldtalk.grp";
 
-   CC.TeamNum=6;          --队伍人数
-   CC.MyThingNum=200      --主角物品数量
+    CC.TeamNum=6;          --队伍人数
+    CC.MyThingNum=200      --主角物品数量
 
-   CC.ShopScene={};       --小宝商店场景数据，sceneid 场景id，d_shop 小宝位置D*, d_leave 小宝离开D*，一般在场景出口，路过触发
-   CC.ShopScene[0]={sceneid=1,d_shop=16,d_leave={17,18}, };
-   CC.ShopScene[1]={sceneid=3,d_shop=14,d_leave={15,16}, };
-   CC.ShopScene[2]={sceneid=40,d_shop=20,d_leave={21,22}, };
-   CC.ShopScene[3]={sceneid=60,d_shop=16,d_leave={17,18}, };
-   CC.ShopScene[4]={sceneid=61,d_shop=9,d_leave={10,11,12}, };
+    CC.ShopScene={};       --小宝商店场景数据，sceneid 场景id，d_shop 小宝位置D*, d_leave 小宝离开D*，一般在场景出口，路过触发
+    CC.ShopScene[0]={sceneid=1,d_shop=16,d_leave={17,18}, };
+    CC.ShopScene[1]={sceneid=3,d_shop=14,d_leave={15,16}, };
+    CC.ShopScene[2]={sceneid=40,d_shop=20,d_leave={21,22}, };
+    CC.ShopScene[3]={sceneid=60,d_shop=16,d_leave={17,18}, };
+    CC.ShopScene[4]={sceneid=61,d_shop=9,d_leave={10,11,12}, };
 
-  --其他常量
-   CC.MWidth=480;       --主地图宽
-   CC.MHeight=480;      --主地图高
+    --其他常量
+    CC.MWidth=480;       --主地图宽
+    CC.MHeight=480;      --主地图高
 
-   CC.SWidth=64;     --子场景地图大小
-   CC.SHeight=64;
+    CC.SWidth=64;     --子场景地图大小
+    CC.SHeight=64;
 
-   CC.DNum=200;       --D*每个场景的事件数
+    CC.DNum=200;       --D*每个场景的事件数
 
-   CC.XScale=CONFIG.XScale;    --贴图一半的宽高
-   CC.YScale=CONFIG.YScale;
+    CC.XScale=CONFIG.XScale;    --贴图一半的宽高
+    CC.YScale=CONFIG.YScale;
 
-   CC.Frame=50;     --每帧毫秒数
-   CC.SceneMoveFrame=CC.Frame*2;           --场景移动帧速，用于场景移动事件
-   CC.PersonMoveFrame=CC.Frame*2;          --主角移动速度，用于主角移动事件
-   CC.AnimationFrame=CC.Frame*3;           --动画显示帧速，用于显示动画事件
+    CC.Frame=50;     --每帧毫秒数
+    CC.SceneMoveFrame=CC.Frame*2;           --场景移动帧速，用于场景移动事件
+    CC.PersonMoveFrame=CC.Frame*2;          --主角移动速度，用于主角移动事件
+    CC.AnimationFrame=CC.Frame*3;           --动画显示帧速，用于显示动画事件
 
-   CC.WarAutoDelay=300;                   --自动战斗时显示头像的延时
+    CC.WarAutoDelay=300;                   --自动战斗时显示头像的延时
 
-   CC.DirectX={0,1,-1,0};  --不同方向x，y的加减值，用于走路改变坐标值
-   CC.DirectY={-1,0,0,1};
+    CC.DirectX={0,1,-1,0};  --不同方向x，y的加减值，用于走路改变坐标值
+    CC.DirectY={-1,0,0,1};
 
-   CC.MyStartPic=2501;      --主角走路起始贴图
-   CC.BoatStartPic=3715;    --船起始贴图
+    CC.MyStartPic=2501;      --主角走路起始贴图
+    CC.BoatStartPic=3715;    --船起始贴图
 
-   CC.Level=30;                  ---人物等级和每等级经验
-   CC.Exp={    50,    150,     300 ,500   , 750 ,
+    CC.Level=30;                  ---人物等级和每等级经验
+    CC.Exp={    50,    150,     300 ,500   , 750 ,
                1050,  1400,   1800 ,2250  , 2750 ,
                3850,  5050,   6350 ,7750  , 9250 ,
                10850, 12550, 14350 ,16750 , 18250 ,
                21400, 24700, 28150 ,31750 , 35500 ,
-	           39400, 43450, 47650 ,52000 , 60000  };
+               39400, 43450, 47650 ,52000 , 60000  };
 
     CC.MMapBoat={};    --主地图船可以进入的贴图
 	local tmpBoat={ {0x166,0x16a},{0x176,0x17c},{0x1ca,0x1d0},{0x1fa,0x262},{0x3f8,0x3fe},};
@@ -207,7 +207,7 @@ function SetGlobalConst()
 
     CC.Shemale={ [78]=1,[93]=1}   --需要自宫的书的id
 
-   CC.Effect={[0]=9,14,17,9,13,                    --eft.idx/grp贴图各个武功效果贴图个数
+    CC.Effect={[0]=9,14,17,9,13,                    --eft.idx/grp贴图各个武功效果贴图个数
                  17,17,17,18,19,
                  19,15,13,10,10,
                  15,21,16,9,11,
@@ -234,31 +234,31 @@ function SetGlobalConst()
     CC.NewGameEvent=691;                       --新游戏场景执行事件。如果没有，则看新游戏坐标后面有没有事件。
     CC.NewPersonPic=3445;                      --开始主角pic
 
-   CC.PersonAttribMax={};             --人物属性最大值
-   CC.PersonAttribMax["经验"]=60000;
-   CC.PersonAttribMax["物品修炼点数"]=60000;
-   CC.PersonAttribMax["修炼点数"]=60000;
-   CC.PersonAttribMax["生命最大值"]=999;
-   CC.PersonAttribMax["受伤程度"]=100;
-   CC.PersonAttribMax["中毒程度"]=100;
-   CC.PersonAttribMax["内力最大值"]=9999;
-   CC.PersonAttribMax["体力"]=100;
-   CC.PersonAttribMax["攻击力"]=500;
-   CC.PersonAttribMax["防御力"]=500;
-   CC.PersonAttribMax["轻功"]=500;
-   CC.PersonAttribMax["医疗能力"]=320;
-   CC.PersonAttribMax["用毒能力"]=320;
-   CC.PersonAttribMax["解毒能力"]=320;
-   CC.PersonAttribMax["抗毒能力"]=320;
-   CC.PersonAttribMax["拳掌功夫"]=320;
-   CC.PersonAttribMax["御剑能力"]=320;
-   CC.PersonAttribMax["耍刀技巧"]=320;
-   CC.PersonAttribMax["特殊兵器"]=320;
-   CC.PersonAttribMax["暗器技巧"]=320;
-   CC.PersonAttribMax["武学常识"]=100;
-   CC.PersonAttribMax["品德"]=100;
-   CC.PersonAttribMax["资质"]=100;
-   CC.PersonAttribMax["攻击带毒"]=100;
+    CC.PersonAttribMax={};             --人物属性最大值
+    CC.PersonAttribMax["经验"]=60000;
+    CC.PersonAttribMax["物品修炼点数"]=60000;
+    CC.PersonAttribMax["修炼点数"]=60000;
+    CC.PersonAttribMax["生命最大值"]=999;
+    CC.PersonAttribMax["受伤程度"]=100;
+    CC.PersonAttribMax["中毒程度"]=100;
+    CC.PersonAttribMax["内力最大值"]=9999;
+    CC.PersonAttribMax["体力"]=100;
+    CC.PersonAttribMax["攻击力"]=500;
+    CC.PersonAttribMax["防御力"]=500;
+    CC.PersonAttribMax["轻功"]=500;
+    CC.PersonAttribMax["医疗能力"]=320;
+    CC.PersonAttribMax["用毒能力"]=320;
+    CC.PersonAttribMax["解毒能力"]=320;
+    CC.PersonAttribMax["抗毒能力"]=320;
+    CC.PersonAttribMax["拳掌功夫"]=320;
+    CC.PersonAttribMax["御剑能力"]=320;
+    CC.PersonAttribMax["耍刀技巧"]=320;
+    CC.PersonAttribMax["特殊兵器"]=320;
+    CC.PersonAttribMax["暗器技巧"]=320;
+    CC.PersonAttribMax["武学常识"]=100;
+    CC.PersonAttribMax["品德"]=100;
+    CC.PersonAttribMax["资质"]=100;
+    CC.PersonAttribMax["攻击带毒"]=100;
 
     CC.WarDataSize=186;         --战斗数据大小  war.sta数据结构
     CC.WarData_S={};        --战斗数据结构

@@ -1,5 +1,3 @@
-require(CONFIG.ScriptPath .. "model/data_struct")
-
 Scene_S={};
 Scene_S["代号"]={0,0,2}
 Scene_S["名称"]={2,2,10}

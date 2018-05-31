@@ -1,5 +1,4 @@
 -- Person class
-require(CONFIG.ScriptPath .. "model/data_struct")
 
 Person_S={};      --保存人物数据的结构，以便以后存取
 Person_S["代号"]={0,0,2}

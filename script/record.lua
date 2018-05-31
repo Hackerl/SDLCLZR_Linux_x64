@@ -4,6 +4,7 @@
 --
 --这里是先把数据读入Byte数组中。然后定义访问相应表的方法，在访问表时直接从数组访问。
 --与以前的实现相比，从文件中读取和保存到文件的时间显著加快。而且内存占用少了
+
 require(CONFIG.ScriptPath .. "model/data_struct");
 require(CONFIG.ScriptPath .. "model/person");
 require(CONFIG.ScriptPath .. "model/thing");

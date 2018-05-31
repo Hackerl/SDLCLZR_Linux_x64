@@ -1,6 +1,4 @@
 -- Person class
-require(CONFIG.ScriptPath .. "model/data_struct")
-
 Thing_S={};
 Thing_S["代号"]={0,0,2}
 Thing_S["名称"]={2,2,20}

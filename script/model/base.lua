@@ -1,4 +1,4 @@
-require(CONFIG.ScriptPath .. "model/data_struct")
+-- Base class
    --定义记录文件R×结构。  lua不支持结构，无法直接从二进制文件中读取，因此需要这些定义，用table中不同的名字来仿真结构。
 Base_S={};         --保存基本数据的结构，以便以后存取
 Base_S["乘船"]={0,0,2}   -- 起始位置(从0开始)，数据类型(0有符号 1无符号，2字符串)，长度

@@ -1,5 +1,3 @@
-require(CONFIG.ScriptPath .. "model/data_struct")
-
 Shop_S={};
 for i=1,5 do
   Shop_S["物品" .. i]={0+2*(i-1),0,2};
